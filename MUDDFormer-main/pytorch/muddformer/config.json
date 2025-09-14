@@ -1,0 +1,35 @@
+{
+  "architectures": [
+    "MUDDFormer"
+  ],
+  "auto_map": {
+    "AutoConfig": "configuration_muddformer.MUDDFormerConfig",
+    "AutoModelForCausalLM": "modeling_muddformer.MUDDFormer"
+  },
+  "block_size": 2048,
+  "bos_token_id": 1,
+  "dense": true,
+  "dense_type": "qkvr",
+  "dim": 2560,
+  "dynamic_dense": true,
+  "eos_token_id": 2,
+  "expand_last": true,
+  "head_dim": 80,
+  "intermediate_size": 6912,
+  "is_training": false,
+  "model_type": "muddformer",
+  "n_head": 32,
+  "n_layer": 32,
+  "n_local_heads": 32,
+  "norm_eps": 1e-06,
+  "rope_base": 10000,
+  "round64": true,
+  "sepln": true,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.35.0",
+  "use_gradient_checkpointing": false,
+  "use_layer_cache": true,
+  "use_qk_norm": true,
+  "vocab_size": 50432
+}

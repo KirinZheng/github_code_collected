@@ -1,0 +1,38 @@
+## train sdt_v2 coco17 80G
+source activate base && cd /zhengzeqi/Githubs_code/Spike-Driven-Transformer-V3-main/SDT_V3/Detection/tools && CUDA_VISIBLE_DEVICES=0,1 ./dist_train.sh ../configs/sdt_mask_rcnn/mask-rcnn_sdt-t_fpn_1x_coco_80G.py 2
+
+
+## train sdt_v2 coco17 80G
+cd /zhengzeqi/Githubs_code/Spike-Driven-Transformer-V3-main/SDT_V3/Detection/tools
+CUDA_VISIBLE_DEVICES=0 ./dist_train.sh ../configs/sdt_mask_rcnn/mask-rcnn_sdt-t_fpn_1x_coco.py 1
+
+
+## train sdt_v2 coco17 follow by xuerui qiu code
+cd /zhengzeqi/Githubs_code/Spike-Driven-Transformer-V3-main/SDT_V3/Detection/tools
+CUDA_VISIBLE_DEVICES=0 ./dist_train.sh ../configs/sdt_mask_rcnn/mask-rcnn_sdt_fpn_1x_coco_follow_by_xuerui_qformer_code.py 1
+
+
+
+## train sdt_v2_TFC coco17
+cd /zhengzeqi/Githubs_code/Spike-Driven-Transformer-V3-main/SDT_V3/Detection/tools
+CUDA_VISIBLE_DEVICES=0 ./dist_train.sh ../configs/sdt_mask_rcnn/mask-rcnn_sdt_TFC_fpn_1x_coco_follow_by_xuerui_qformer_code.py 1
+
+
+## train sdt_v1 follow by xuerui qiu coco17
+cd /zhengzeqi/Githubs_code/Spike-Driven-Transformer-V3-main/SDT_V3/Detection/tools
+CUDA_VISIBLE_DEVICES=0 ./dist_train.sh ../configs/sdt_v1_mask_rcnn/mask-rcnn_sdt_v1_fpn_1x_coco_follow_by_xuerui_qformer_code.py 1
+
+
+## train sdt_v1_TFC follow by xuerui qiu coco17
+cd /zhengzeqi/Githubs_code/Spike-Driven-Transformer-V3-main/SDT_V3/Detection/tools
+CUDA_VISIBLE_DEVICES=0 ./dist_train.sh ../configs/sdt_v1_mask_rcnn/mask-rcnn_sdt_v1_TFC_fpn_1x_coco_follow_by_xuerui_qformer_code.py 1
+
+
+## train qkformer follow by xuerui qiu coco17
+cd /zhengzeqi/Githubs_code/Spike-Driven-Transformer-V3-main/SDT_V3/Detection/tools
+CUDA_VISIBLE_DEVICES=0 ./dist_train.sh ../configs/qkformer_mask_rcnn/mask-rcnn_qkformer_fpn_1x_coco_follow_by_xuerui_qformer_code.py 1
+
+
+## train qkformer_TFC follow by xuerui qiu coco17
+cd /zhengzeqi/Githubs_code/Spike-Driven-Transformer-V3-main/SDT_V3/Detection/tools
+CUDA_VISIBLE_DEVICES=0 ./dist_train.sh ../configs/qkformer_mask_rcnn/mask-rcnn_qkformer_TFC_fpn_1x_coco_follow_by_xuerui_qformer_code.py 1

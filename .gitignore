@@ -1,0 +1,5 @@
+## Ignore 
+**/__pycache__/
+**/work_dirs/
+**/weights/
+**/official_weights/
