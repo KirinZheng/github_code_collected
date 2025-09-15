@@ -299,7 +299,7 @@ class DenseFormer(nn.Module):
                 x,
                 
             )
-            print(self.weights[rep_idx - 1].weight.view(-1).shape, x_accs[rep_idx % self.dilation_factor][1].shape)
+            # print(self.weights[rep_idx - 1].weight.view(-1).shape, x_accs[rep_idx % self.dilation_factor][1].shape)
             x = torch.tensordot(self.weights[rep_idx - 1].weight.view(-1), x_accs[rep_idx % self.dilation_factor][1], dims=1)
             # 这里是按照对self.weights[rep_idx - 1].weight.view(-1)的最后一个维度 + x_accs[rep_idx % self.dilation_factor][1]的第一个维度进行内积，其实算是一种加权平均了
             

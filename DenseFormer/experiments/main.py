@@ -82,7 +82,7 @@ def main(args):
     print(tmp_output['logits'])
     print(tmp_output['loss'])
 
-    assert False
+    # assert False
 
     model = distributed_backend.transform_model(model)
     
