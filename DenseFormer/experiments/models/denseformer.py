@@ -257,7 +257,6 @@ class DenseFormer(nn.Module):
         b, t = idx.size()
         assert t <= self.config.sequence_length, f"Cannot forward sequence of length {t}, block size is only {self.config.sequence_length}"
         
-        
         # forward the GPT model itself
         if use_cache:
             idx, index_shift, cache_context = self.lm_cache(idx)
@@ -272,16 +271,22 @@ class DenseFormer(nn.Module):
         x = pos_emb_closure.adapt_model_input(tok_emb, start_index=index_shift)
         x = self.transformer.drop(x)
         x_accs = []
+        print(f"n_repeat: {self.n_repeat}")
+        print(f"dilation_factor: {self.dilation_factor}")
+        print(f"increate_T_every: {self.increase_T_every}")
         # 这里假设n_repeat = 12 //2 = 6 (将layer进行分组), dilation_factor = 1
         # 这里的 current_group_size 代表，包含embedding之后n_repeat+1 受 dilation_factor 的影响
         for i in range(self.dilation_factor):
+            print(f"now i in self.dilation_factor, {i}")
             current_group_size = (self.n_repeat + 1) // self.dilation_factor
             if i < (self.n_repeat + 1) % self.dilation_factor:
                 current_group_size += 1
             # x_accs来存储每个blocks的输出值， *x.shape的shape是去除第一维度的batch_size，并根据current_group_size进行zeros的赋值
             # 这里存储进x_accs是一个tuple，目前不太知道这里的None是干什么的
+            print("current_group_size:", current_group_size)
+            # x shape is B L D
             x_accs.append((torch.zeros((current_group_size, *x.shape), device=x.device, dtype=x.dtype), None))
-        
+
         # 将embedding的输出存储进x_accs[0]对应的tensor中
         # 细致查看了apply_inplace_set发现None位置的变量没有使用到过
         x_accs[0] = apply_inplace_set(x_accs[0], 0, x)
@@ -294,7 +299,9 @@ class DenseFormer(nn.Module):
                 x,
                 
             )
+            print(self.weights[rep_idx - 1].weight.view(-1).shape, x_accs[rep_idx % self.dilation_factor][1].shape)
             x = torch.tensordot(self.weights[rep_idx - 1].weight.view(-1), x_accs[rep_idx % self.dilation_factor][1], dims=1)
+            # 这里是按照对self.weights[rep_idx - 1].weight.view(-1)的最后一个维度 + x_accs[rep_idx % self.dilation_factor][1]的第一个维度进行内积，其实算是一种加权平均了
             
         x = self.transformer.ln_f(x)
 

@@ -69,11 +69,12 @@ def main(args):
         
     # print(f"Num training tokens: {len(data['train'])}")
     # print(f"Num validation tokens: {len(data['val'])}")
-    
+
     model = models.make_model_from_args(args).to(args.device) # todo: take care of initializing the model if args.use_pretrained != 'none'
     
     ##### just for test ###
-
+    # input command 
+    # python main.py --config_format base --model denseformer --increase_T_every 3 --dilation_factor 2 --n_layer 24
     model.eval()
     tmp_input = torch.randint(0, 20000, (32, 128)).to(args.device)
     tmp_output = model(tmp_input)
