@@ -28,6 +28,7 @@ import models
 from data.utils import get_dataset, prepare_dataset
 from optim.base import train_base
 import distributed
+import torch
 
 
 def get_args():
@@ -71,7 +72,14 @@ def main(args):
     
     model = models.make_model_from_args(args).to(args.device) # todo: take care of initializing the model if args.use_pretrained != 'none'
     
-    
+    ##### just for test ###
+
+    model.eval()
+    tmp_input = torch.randint(0, 20000, (32, 128)).to(args.device)
+    tmp_output = model(tmp_input)
+    print(type(tmp_output))
+    print(tmp_output['logits'])
+    print(tmp_output['loss'])
 
     assert False
 
